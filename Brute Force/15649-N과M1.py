@@ -9,7 +9,7 @@ def dfs(n,lst):
       visited[j]=1
       dfs(n+1,lst+[j])
       visited[j]=0 #속도를 위한 처리라고함..
-    
+
 N,M = map(int,input().split())
 ans=[]
 visited=[0]*(N+1)

@@ -9,15 +9,17 @@ def dfs(current):
       dfs(n)
 
 def bfs(current):
-  queue = []
+  q = []
+
   visited[current]=1
-  queue.append(current) #queue에 초기데이터(들) 삽입
+  q.append(current) #q에 초기데이터(들) 삽입
   ans_bfs.append(current)
-  while queue: #broad하게 탐색할게 남아있을 때 까지
-    current = queue.pop(0)
+
+  while q:
+    current = q.pop(0)
     for n in graph[current]:
       if not visited[n]:
-        queue.append(n)
+        q.append(n)
         ans_bfs.append(n)
         visited[n]=1
 
