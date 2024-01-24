@@ -40,5 +40,5 @@ while isNotEndable:
       break
 
 print(count)
-  
+
 
