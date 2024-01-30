@@ -4,14 +4,14 @@ rice_cakes = list(map(int,input().split()))
 def rice_cake_search(rice_cakes,start,end,target):
   if start>end:
     return None
-    
+
   mid = (start+end)//2
-  
+
   pieces = 0
   for i in range(n):
     if rice_cakes[i]-mid>0:
       pieces += rice_cakes[i]-mid
-      
+
   if pieces == m:
     return mid
   elif pieces > m:
