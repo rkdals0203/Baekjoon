@@ -23,7 +23,7 @@ for z in range (1, n+1):
       graph[i][j] = min(graph[i][j],(graph[i][z]+graph[z][j]))
 
 #출력
-if graph[1][k]+graph[k][x] == 2*INF:
+if graph[1][k]+graph[k][x] >= INF:
     print(-1)
 else:
   print(graph[1][k]+graph[k][x])
