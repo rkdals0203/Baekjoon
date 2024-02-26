@@ -1,3 +1,4 @@
+# 완전 탐색
 import sys
 input = sys.stdin.readline
 

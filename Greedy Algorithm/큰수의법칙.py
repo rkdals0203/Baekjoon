@@ -20,3 +20,26 @@ while outer_count < M:
     break
 
 print(ans)
+
+#2
+import sys
+input = sys.stdin.readline
+
+ans = 0
+count = 0
+n, m, k = map(int,input().split())
+arr = list(map(int,input().split()))
+arr = sorted(arr, reverse = True)
+
+first = arr[0]
+second = arr[1]
+
+while count<m:
+  for _ in range(k):
+    ans += first
+    count += 1
+  ans+=second
+  count += 1
+
+print(ans)
+
