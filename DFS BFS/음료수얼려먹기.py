@@ -37,6 +37,7 @@ def dfs(y,x):
   #현재 좌표가 0이라면
   if graph[y][x] == 0:
     graph[y][x] = 1
+    #상하좌우로 퍼져나가게 방문하기
     dfs(y-1,x)
     dfs(y+1,x)
     dfs(y,x-1)
@@ -60,6 +61,6 @@ for i in range(n):
 
 print(count)
 
-#visited 필요 없음. 왜냐하면 그래프에서 1로 표시해버리면 그만이거든
+#visited 필요 없음. 왜냐하면 그래프에서 1로 표시해버리면 그만이기 때문
 #또한, 그래프는 인접리스트가 아니라 좌표임.
 visited = [0]*9
