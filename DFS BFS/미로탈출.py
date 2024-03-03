@@ -27,3 +27,34 @@ def dfs(y, x):
 
 dfs(1, 1)
 print(graph[n][m])
+
+
+#2
+# deque는 자유자재로 스택처럼, 혹은 큐처럼 사용할 수 있는 자료구조.
+from collections import deque
+
+dx = [-1,1,0,0]
+dy = [0,0,-1,1]
+
+def bfs(y,x):
+  queue = deque([(y,x)]) #처음으로 (y,x) 튜플을 큐에 삽입하고 시작  
+  while queue: #큐가 비어있기 까지
+    (y,x) = queue.popleft()
+    for i in range(4):
+      ny = y + dy[i]
+      nx = x + dx[i]
+      if nx>=0 and nx<m and ny>=0 and ny<n: #공간을 벗어나지 않은 경우
+        if graph[ny][nx] == 1: #괴물이 없는 부분이라면
+          graph[ny][nx] = graph[y][x] + 1
+          queue.append((ny,nx))
+
+  print(graph[n-1][m-1]) # 미로 끝의 숫자 출력
+
+
+# 미로 세팅
+n,m = map(int,input().split())
+graph = []
+for _ in range(n):
+  graph.append(list(map(int,input())))
+
+bfs(0,0)
