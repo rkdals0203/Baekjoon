@@ -1,43 +1,66 @@
-array = [5,7,9,0,3,1,6,2,4,8]
+n = int(input())
+arr = []
+for _ in range(n):
+  temp = list(input().split())
+  arr.append(temp)
 
-#퀵 정렬
+#기본 정렬 라이브러리로 구현
+def basic_sort(arr):
+  arr.sort(key = lambda student: int(student[1])) #람다 함수 이용
+  print(*arr)
+
+#선택 정렬로 구현
+def selection_sort(arr):
+  for i in range(n):
+    for j in range(i+1,n):
+      max_index = i
+      if arr[j][1] < arr[max_index][1]: #j번째 요소의 점수가 기존 max_index보다 더 크면
+        max_index = j #max_index가 j가 됨
+      arr[i], arr[max_index] = arr[max_index], arr[i]
+  for k in range(n):
+    print(arr[k][0],end=" ")
+
+#삽입 정렬로 구현
+def insertion_sort(arr):
+  for i in range(n):
+    for j in range(i,0,-1):
+      if arr[j][1] < arr[j-1][1]: #j번째의 점수가 j-1보다 작으면 
+        arr[j],arr[j-1] = arr[j-1],arr[j] #서로 교체
+      else: #아니면 멈추기
+        break
+  for k in range(n):
+    print(arr[k][0],end=" ")
+
+#퀵 정렬로 구현
 def quick_sort(arr):
   if len(arr)<=1:
     return arr
   pivot = arr[0]
-  new_arr = arr[1:]
+  remainder_arr = arr[1:]
   left_arr = []
   right_arr = []
-  for i in new_arr:
-    if i < pivot:
+  for i in remainder_arr:
+    if i[1]<pivot[1]:
       left_arr.append(i)
     else:
       right_arr.append(i)
   return quick_sort(left_arr)+[pivot]+quick_sort(right_arr)
+  
+# sorted_arr = quick_sort(arr)
+# for i in sorted_arr:
+#   print(i[0],end=" ")
 
-# #계수 정렬
-# new_array = [0]*(max(array)+1)
-# for i in array:
-#   new_array[i]+=1
-# for j in range(len(new_array)):
-#   for k in range(new_array[j]):
-#     print(j, end=" ")
+#계수 정렬로 구현
+def count_sort(arr):
+  count = [[] for _ in range(int(max(arr, key= lambda student: student[1])[1])+1)]
+  for i in range(n):
+    count[int(arr[i][1])].append(arr[i][0])
+  for j in count:
+    if j:
+      for k in range(len(j)):
+        print(j[k],end=" ")
 
-# #선택 정렬
-# for i in range(len(array)):
-#   min_index = i
-#   for j in range(i,len(array)):
-#     if array[j] < array[min_index]:
-#       min_index = j
-#   array[i], array[min_index] = array[min_index], array[i]
-# print(array)
+count_sort(arr)
 
-
-#삽입 정렬
-for i in range(1,len(array)): #1부터 끝까지 증가
-  for j in range(i,0,-1): #i부터 1까지 감소
-    if array[j] < array[j-1]: #오른쪽에 있는 원소가 왼쪽에 있는 원소보다 작다면?
-      array[j],array[j-1] = array[j-1], array[j]
-    else:
-      break
-print(array)
+    
+    
