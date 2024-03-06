@@ -20,7 +20,8 @@ for _ in range(n):
 #기본 정렬 라이브러리로 구현
 def basic_sort(arr):
   arr.sort(key = lambda student: int(student[1])) #람다 함수 이용
-  print(*arr)
+  for student in arr:
+    print(student[0],end=" ")
 
 #선택 정렬로 구현
 def selection_sort(arr):
