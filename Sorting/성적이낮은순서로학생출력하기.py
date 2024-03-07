@@ -10,7 +10,6 @@ for student in array:
 
 
 #2
-
 n = int(input())
 arr = []
 for _ in range(n):

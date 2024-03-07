@@ -1,16 +1,22 @@
-array = [0,2,4,6,8,10,12,14,16,18]
+n = int(input())
+equips = list(map(int,input().split()))
+m = int(input())
+find_equips = list(map(int,input().split()))
 
-def binary_search(start,end,target,array):
-  if start > end: #종료조건
+def binary_search(arr,start,end,target):
+  if start>end: #종료조건
     return None
     
-  middle = (start+end)//2 #start:0이고 end:9인 경우 middle은 버림해서 4
-  if target==array[middle]:
+  middle = (start+end)//2
+  if target == arr[middle]:
     return middle
-  elif target<array[middle]:
-    return binary_search(start,middle-1,target,array)
+  elif target < arr[middle]: #목표 숫자가 중간보다 작으면
+    return binary_search(arr,start,middle-1,target)
+  else: #목표 숫자가 중간보다 크면
+    return binary_search(arr,middle+1,end,target)
+
+for i in find_equips:
+  if binary_search(equips,0,n-1,i) == None:
+    print("no",end=" ")
   else:
-    return binary_search(middle+1,end,target,array)
-
-
-print(binary_search(0,9,6,array))
+    print("yes",end=" ")
