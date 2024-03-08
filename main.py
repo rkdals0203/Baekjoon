@@ -1,22 +1,22 @@
-n = int(input())
-equips = list(map(int,input().split()))
-m = int(input())
-find_equips = list(map(int,input().split()))
+n,m = map(int,input().split())
+arr = list(map(int,input().split()))
+result=0
 
+#가장 큰거 기준으로 이진탐색 진행
 def binary_search(arr,start,end,target):
-  if start>end: #종료조건
+  global result
+  if start>end:
     return None
-    
-  middle = (start+end)//2
-  if target == arr[middle]:
-    return middle
-  elif target < arr[middle]: #목표 숫자가 중간보다 작으면
-    return binary_search(arr,start,middle-1,target)
-  else: #목표 숫자가 중간보다 크면
-    return binary_search(arr,middle+1,end,target)
-
-for i in find_equips:
-  if binary_search(equips,0,n-1,i) == None:
-    print("no",end=" ")
+  mid = (start+end)//2 #절단기 높이를 이진 탐색으로 찾기
+  sum = 0
+  for i in arr:
+    if i-mid>0:
+      sum+=i-mid
+  if sum>=target: #떡이 더 많이 남거나 같으면
+    result = mid #높이 업데이트
+    return binary_search(arr,mid+1,end,target)
   else:
-    print("yes",end=" ")
+    return binary_search(arr,start,mid-1,target)
+    
+binary_search(arr,0,max(arr),m)
+print(result)
