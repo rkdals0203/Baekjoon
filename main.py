@@ -1,22 +1,19 @@
-n,m = map(int,input().split())
-arr = list(map(int,input().split()))
-result=0
+n = int(input())
 
-#가장 큰거 기준으로 이진탐색 진행
-def binary_search(arr,start,end,target):
-  global result
-  if start>end:
-    return None
-  mid = (start+end)//2 #절단기 높이를 이진 탐색으로 찾기
-  sum = 0
-  for i in arr:
-    if i-mid>0:
-      sum+=i-mid
-  if sum>=target: #떡이 더 많이 남거나 같으면
-    result = mid #높이 업데이트
-    return binary_search(arr,mid+1,end,target)
-  else:
-    return binary_search(arr,start,mid-1,target)
-    
-binary_search(arr,0,max(arr),m)
-print(result)
+dp = [0 for _ in range(n+1)]
+
+for i in range(2, n+1):
+  candidates = []
+  if i%5 == 0:
+    candidates.append(dp[i//5]+1)
+  if i%3 == 0:
+    candidates.append(dp[i//3]+1)
+  if i%2 == 0:
+    candidates.append(dp[i//2]+1)
+  candidates.append(dp[i-1]+1)
+  dp[i] = min(candidates)
+
+print(dp[n])
+  
+
+
