@@ -1,10 +1,16 @@
-n = int(input())
+n, m = map(int, input().split())
+coins = []
+for _ in range(n):
+  coins.append(int(input()))
+dp = [10001] * (m + 1)
+dp[0] = 0
 
-dp = [0]*(n+1)
-dp[0] = 1
-dp[1] = 1
+for j in range(m + 1):
+  for coin in coins:
+    if j-coin >= 0:
+        dp[j] = min(dp[j], dp[j - coin] + 1)
 
-for i in range (2, n+1):
-  dp[i] = dp[i-1]+dp[i-2]*2
-
-print(dp[n])
+if dp[m] == 10001:
+    print(-1)
+else:
+    print(dp[m])
