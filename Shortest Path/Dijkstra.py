@@ -41,3 +41,77 @@ for i in range (1,n+1):
     print("INFINITY")
   else:
     print(distance[i])
+
+
+#2
+INF = int(1e9)
+n,m = map(int,input().split())
+start = int(input())
+
+graph = [[]for _ in range(n+1)]
+visited = [False]*(n+1)
+distance = [INF]*(n+1)
+
+for _ in range(m):
+  a,b,c = map(int,input().split())
+  graph[a].append((b,c))
+
+def get_smallest_node():
+  min_value = INF
+  min_index = 0
+  for i in range(n+1):
+    if min_value>distance[i] and not visited[i]:
+      min_value = distance[i]
+      min_index = i
+  return min_index
+
+def dijkstra(start):
+  #시작 노드 초기화
+  distance[start] = 0
+  visited[start] = True
+  for i in graph[start]:
+    distance[i[0]] = i[1]
+  #나머지 노드
+  for j in range(n-1): #n-1번 반복
+    now = get_smallest_node()
+    visited[now] = True
+    for k in graph[now]:
+      if distance[k[0]] > distance[now]+k[1]: #기존 최단경로보다 이 경로 통해서 가는게 더 빠르다면
+        distance[k[0]] = distance[now]+k[1]
+
+dijkstra(start)
+print(distance)
+
+import heapq
+
+INF = int(1e9)
+n,m = map(int,input().split())
+start = int(input())
+
+graph = [[]for _ in range(n+1)]
+visited = [False]*(n+1)
+distance = [INF]*(n+1)
+
+for _ in range(m):
+  a,b,c = map(int,input().split()) #a부터 b까지 가는 거리가 c라는 뜻
+  graph[a].append((b,c))
+
+def dijkstra(start):
+  queue = []
+  #시작 노드 초기화
+  heapq.heappush(queue,(0,start))
+  distance[start] = 0
+
+  while queue:
+    dist,now = heapq.heappop(queue)
+    if visited[now] == True: #visited가 이미 참이면 무시
+      continue
+    visited[now] = True
+    for i in graph[now]:
+        if distance[i[0]] > distance[now]+i[1]: #기존 최단경로보다 이 경로 통해서 가는게 더 빠르다면
+          distance[i[0]] = distance[now]+i[1]
+          heapq.heappush(queue,(distance[i[0]],i[0]))
+
+dijkstra(start)
+print(distance)
+
