@@ -44,3 +44,42 @@ for i in range(1, len(costs)):
     result += costs[i]
 
 print(result)
+
+#2
+#초기화
+n,m = map(int,input().split())
+paths = []
+parent = [0]*(n+1)
+costs = []
+result = 0
+for i in range(n+1):
+  parent[i] = i
+for _ in range(m):
+  a,b,c = map(int,input().split())
+  paths.append((c,a,b))
+paths.sort()
+
+#크루스칼을 위한 함수
+def find(node):
+  if parent[node] != node:
+    parent[node] = find(parent[node])
+  return parent[node]
+def union(node1,node2):
+  root_node1, root_node2 = find(node1), find(node2)
+  if root_node1 == root_node2: #싸이클이 발생하면 True 반환
+    return True
+  elif root_node1 < root_node2:
+    parent[root_node2] = root_node1
+  else:
+    parent[root_node1] = root_node2
+  return False
+
+for path in paths:
+  c,a,b = path
+  if not union(a,b): #싸이클이 발생안했다면
+    costs.append(c)
+
+for j in range(len(costs)-1):
+  result += costs[j]
+  
+print(result)
