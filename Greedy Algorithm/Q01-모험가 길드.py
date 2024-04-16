@@ -11,3 +11,17 @@ for i in f:
     count = 0
   
 
+#2
+n = int(input())
+advs = list(map(int,input().split()))
+advs.sort()
+result = 0
+count = 0
+
+for i in range(n):
+  count += 1
+  if count >= advs[i]:
+    result += 1
+    count = 0
+
+print(result)
