@@ -1,14 +1,16 @@
-n, m, k = map(int, input().split())
-numbers = list(map(int, input().split()))
-numbers.sort(reverse=True)
-first = numbers[0]
-second = numbers[1]
-result = 0
+n,k = map(int, input().split())
+count = 0
 
-moks = m // k
-nameoji = m % k
-su = m - nameoji
+if n<k:
+  count = n-1
 
-result += first * su
-result += second * nameoji
-print(result)
+else:
+  while n>=k:
+    #빼는 부분(나눠지지 않을 때만 진짜로 뺌)
+    target = (n//k)*k
+    count += n-target
+    n = target
+    #나누는 부분
+    n = n//k
+    count+=1
+print(count)
