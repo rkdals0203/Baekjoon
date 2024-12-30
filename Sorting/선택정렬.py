@@ -10,3 +10,16 @@ def selection_sort(array):
   return array
 
 print(selection_sort(array))
+
+#2
+array = [10,5,4,3,1,9,7,8,6,2]
+
+for i in range (len(array)):
+    min_index = i
+    for j in range (i+1, len(array)):
+        if array[j] < array[min_index]:
+            min_index = j
+    if array[i] > array[min_index] :
+        array[i], array[min_index] = array[min_index], array[i]
+
+print(array)
