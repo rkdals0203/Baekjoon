@@ -1,13 +1,25 @@
-array = [1,231,13,2,3,4,5,6,7,8,9,10] #len(array) == 12
-indexes = [0]*(max(array)+1) #232개의 0배열
-sorted_arr = []
+n, m = map(int, input().split())
+rice_cakes = list(map(int, input().split()))
 
-for i in range(len(array)): #0부터 11까지
-    index = array[i]
-    indexes[index] += 1
-    
-for j in range(len(indexes)): #11
-    if indexes[j] != 0:
-        sorted_arr.append(j)
+start = 0
+end = max(rice_cakes)
+mid = 0
+res = 0
 
-print(sorted_arr)
+while start<=end:
+    mid = (start + end) // 2
+    total = 0 
+    for i in rice_cakes:
+        if i > mid:
+            total += i - mid
+    if total == m:
+        res = mid
+        break
+    # 토탈이 목표치를 초과할 경우 일단 결과에 저장하고 한계 올려서 탐색
+    elif total > m:
+        res = mid
+        start = mid + 1
+    else:
+        end = mid - 1
+
+print(res)

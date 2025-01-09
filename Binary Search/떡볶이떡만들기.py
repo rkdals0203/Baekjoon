@@ -45,3 +45,62 @@ def binary_search(arr,start,end,target):
 
 binary_search(arr,0,max(arr),m)
 print(result)
+
+
+#3
+
+n, m = map(int, input().split())
+rice_cakes = list(map(int, input().split()))
+h = max(rice_cakes)  # 떡의 최대 길이
+
+def binary_search(start, end):
+    result = 0  # 최적의 결과를 저장할 변수
+    while start <= end:
+        # 중간값 계산
+        mid = (start + end) // 2
+        total = 0
+        
+        # 자른 떡의 길이 합 계산
+        for i in rice_cakes:
+            if i > mid:
+                total += i - mid
+        
+        # 떡 길이가 목표를 넘는 경우
+        if total >= m:
+            result = mid  # 가능한 높이를 저장
+            start = mid + 1  # 더 높은 값 탐색
+        else:
+            end = mid - 1  # 더 낮은 값 탐색
+    
+    return result
+
+print(binary_search(0, h))
+
+
+
+#4
+n, m = map(int, input().split())
+rice_cakes = list(map(int, input().split()))
+
+start = 0
+end = max(rice_cakes)
+mid = 0
+res = 0
+
+while start<=end:
+    mid = (start + end) // 2
+    total = 0 
+    for i in rice_cakes:
+        if i > mid:
+            total += i - mid
+    if total == m:
+        res = mid
+        break
+    # 토탈이 목표치를 초과할 경우 일단 결과에 저장하고 한계 올려서 탐색
+    elif total > m:
+        res = mid
+        start = mid + 1
+    else:
+        end = mid - 1
+
+print(res)
