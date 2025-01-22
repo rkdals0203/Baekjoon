@@ -89,7 +89,7 @@ def quick_sort(array, start, end):
 quick_sort(array,0,len(array)-1)
 
 #4
-array = [10,4,1,3,6,7,5,2,9,8]
+array =  
         #[2(pivot),4,1,3,6,7,5,8(right),9(left),10]
         
         #[2(pivot),4(left),1(right),3,6,7,5,8,9,10]
